@@ -1,0 +1,161 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+%%%%%%%%%%%%%%%%%%% Thesis_AndreGuerra.tex %%%%%%%%%%%%%%%%%%%%%%%%
+%
+% PhD Thesis - Main File
+% André Guerra
+%
+% 04/Apr/2017
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%------------------------------------------------------------
+%% HEADER
+%------------------------------------------------------------
+\documentclass[a4paper, twoside, openright, 11pt, UKenglish]{book}
+%draft
+
+% -----------------------------------------------------------
+% Define all configuration parameters
+% -----------------------------------------------------------
+\input{00_Layout/Thesis_AG_Preamble} % file "Thesis_Preamble.tex"
+
+
+%------------------------------------------------------------
+%% DOCUMENT
+%------------------------------------------------------------
+\begin{document}
+
+%------------------------------------------------------------
+%% Title Page ---------------------------------------------%%
+
+\makeatletter % changes the catcode of @ to 11
+    \title{Small Satellites and Oceanography XX}    \let\Title\@title
+    \author{\textpt{Andr\'e Gomes da Costa Guerra}} \let\Author\@author
+    \date{\the\year}                                \let\Date\@date
+\makeatother % changes the catcode of @ back to 12
+
+
+
+%------------------------------------------------------------
+%% Front matter -------------------------------------------%%
+\frontmatter
+\pagestyle{plain}
+
+%\includepdf{01_FrontMatter/FolhaRostoMAP_v0}
+%\cleardoublepage
+
+\input{01_FrontMatter/Thesis_Titlepage}
+%\cleardoublepage
+
+\input{01_FrontMatter/Thesis_InstitutionsFunding}
+\cleardoublepage
+
+\input{01_FrontMatter/Thesis_DedicationQuote}
+\cleardoublepage
+
+\input{01_FrontMatter/Thesis_Preface}
+\cleardoublepage
+
+\input{01_FrontMatter/Thesis_Acknowledgements}
+\cleardoublepage
+
+\input{01_FrontMatter/Thesis_Abstract}
+\cleardoublepage
+
+%------------------------------------------------------------
+%% Tables of contents -------------------------------------%%
+\microtypesetup{protrusion=false} % disables protrusion locally in the document
+
+\renewcommand{\contentsname}{Contents}
+\hypertarget{Contents}{}
+\bookmark[level=chapter,dest=Contents]{Contents}
+\tableofcontents    % Table of contents
+%\addcontentsline{toc}{chapter}{Contents}
+\cleardoublepage
+
+\renewcommand\listfigurename{List of Figures}
+\hypertarget{ListofFigures}{}
+\bookmark[level=chapter,dest=ListofFigures]{List of Figures}
+\listoffigures      % List of Figures
+%\addcontentsline{toc}{chapter}{List of Figures}
+\cleardoublepage
+
+\renewcommand\listtablename{List of Tables}
+\hypertarget{ListofTables}{}
+\bookmark[level=chapter,dest=ListofTables]{List of Tables}
+\listoftables       % List of Tables
+%\addcontentsline{toc}{chapter}{List of Tables}
+\cleardoublepage
+
+\input{01_FrontMatter/Thesis_Nomenclature}
+%\begin{multicols}{2}
+\begin{small}
+    \markboth{Nomenclature}{Nomenclature}
+    \hypertarget{Nomenclature}{}
+    \bookmark[level=chapter,dest=Nomenclature]{Nomenclature}
+    \printnomenclature
+    %\end{multicols}
+\end{small}
+\cleardoublepage
+
+\microtypesetup{protrusion=true} % enables protrusion
+
+%------------------------------------------------------------
+%% Chapters -----------------------------------------------%%
+\mainmatter
+\pagestyle{myfancy}
+
+%------------------------------------------------------------
+\input{10_Introduction/10_Intro}
+
+%------------------------------------------------------------
+\input{20_SmallSatellites/20_SmallSat}
+
+%------------------------------------------------------------
+\input{30_Oceanography/30_Ocean}
+
+%------------------------------------------------------------
+\input{40_IntegratedScenario/40_NetworkOp}
+
+%------------------------------------------------------------
+\input{50_ThermalAnalysis/50_Thermal}
+
+%------------------------------------------------------------
+\input{60_Conclusions/60_Conclusion}
+
+
+%------------------------------------------------------------
+%% Bibliography -------------------------------------------%%
+\renewcommand{\bibname}{References}
+\addcontentsline{toc}{chapter}{References}
+%%\bibliographystyle{unsrtnat}
+\bibliographystyle{elsarticle-num}
+%%\bibliographystyle{0_Layout/phd_style}
+%\begin{small}
+\bibliography{%
+    70_Bibliography/Introduction_BIB,%
+    70_Bibliography/SmallSat_BIB,%
+    70_Bibliography/Ocean_BIB,%
+    70_Bibliography/NetworkOp_BIB,%
+    70_Bibliography/Thermal_BIB,%
+    70_Bibliography/Appendix_BIB}
+%\end{small}
+
+%------------------------------------------------------------
+%% Appendix -----------------------------------------------%%
+\appendix
+%%%\begin{appendices}
+%%%\end{appendices}
+
+%------------------------------------------------------------
+\input{80_Appendices/81_Appendices_SAR}
+
+\input{80_Appendices/82_Appendices_ThermalAttitude}
+
+
+% ----------------------------------------------------------------------
+\end{document}
+% end of file Thesis_AndreGuerra.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

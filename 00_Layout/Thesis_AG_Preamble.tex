@@ -1,0 +1,437 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+% !TeX root = ../Thesis_AndreGuerra.tex
+%%%%%%%%%%%%%%%%%%% Thesis_AG_Preamble.tex %%%%%%%%%%%%%%%%%%
+%
+% PhD thesis - Preamble
+% André Guerra
+%
+% 04/Apr/2017
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%------------------------------------------------------------
+%% General ------------------------------------------------%%
+
+% Comments and review packages
+\usepackage{lipsum}     % For draft text
+\usepackage[linecolor=red,figcolor=white,colorinlistoftodos,%
+]{todonotes}                                                % TEMP command to review
+\newcommand{\review}[1]{{\textcolor{red}{\framebox{#1}}}}	% TEMP command to review
+
+\pdfminorversion = 6
+
+%%% Book configurations for report class
+%%\makeatletter % changes the catcode of @ to 11
+    %%\newcommand\frontmatter{%
+        %%\cleardoublepage
+        %%%\@mainmatterfalse
+        %%\pagenumbering{roman}
+    %%}
+%%
+    %%\newcommand\mainmatter{%
+        %%\cleardoublepage
+        %%% \@mainmattertrue
+        %%\pagenumbering{arabic}
+    %%}
+%%
+    %%\newcommand\backmatter{%
+        %%\if@openright
+        %%\cleardoublepage
+        %%\else
+        %%\clearpage
+        %%\fi
+        %%% \@mainmatterfalse
+    %%}
+%%\makeatother % changes the catcode of @ back to 12
+
+%------------------------------------------------------------
+%% Language -----------------------------------------------%%
+\usepackage[main=UKenglish,portuguese]{babel}   % Language hyphenation and typographical rules
+\usepackage[T1]{fontenc}                        % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc}                     % Accept different input encodings.
+
+\babeltags{pt = portuguese}
+%\textpt{Portuguese text}
+%\begin{pt}
+%    Portuguese text
+%\end{pt}
+
+%------------------------------------------------------------
+%% Page geometry and others & TOC -------------------------%%
+\usepackage{geometry}	
+\geometry{verbose,
+    a4paper,
+    twoside,                        % switches on twoside mode with left and right margins swapped on verso pages
+    includehead,                    % includes the head of the page
+    includefoot,                    % includes the foot of the page
+    textheight      = 674pt,        % the height of body (the text area)
+    textwidth       = 445pt,        % the width of body (the text area)
+    headheight      = 40.0pt,       % height of header
+    headsep         = 21.68121pt,   % separation between header and text
+    footskip        = 27.46295pt,   % distance separation between baseline of last line of text and baseline of footer
+    marginparsep    = 7.0pt,        % separation between body and marginal notes
+    marginparwidth  = 70pt,         % width of the marginal notes
+    inner           = 22mm          % left margin (for oneside) or inner margin (for twoside)
+    %
+    %outer=25mm,
+    %top=30mm,
+    %bottom=20mm,
+    %headheight=15pt
+}
+\marginparpush = 5.0pt
+
+% Depth of TOC
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+% Control over table of contents, figures, etc
+\usepackage{tocloft}
+
+% General purpose hierarchical index generator
+\usepackage{makeidx}
+\makeindex
+
+% Nomenclature package
+\usepackage[english]{nomencl}
+\makenomenclature
+\usepackage{ifthen}
+\renewcommand{\nomgroup}[1]{%
+\ifthenelse{\equal{#1}{R}}{\item[\textbf{Roman Symbols}]}{%
+\ifthenelse{\equal{#1}{G}}{\item[\textbf{Greek Symbols}]}{%
+\ifthenelse{\equal{#1}{A}}{\item[\textbf{Acronyms/Abbreviations}]}{%
+\ifthenelse{\equal{#1}{T}}{\item[\textbf{Superscripts}]}{%
+\ifthenelse{\equal{#1}{S}}{\item[\textbf{Subscripts}]}{%
+\ifthenelse{\equal{#1}{X}}{\item[\textbf{Other Symbols}]}
+{}
+}% matches mathematical symbols > X
+}% matches Subscripts           > T
+}% matches Superscripts         > R
+}% matches Abbreviations        > A
+}% matches Greek Symbols        > G
+}% matches Roman Symbols        > R
+
+% Appendix
+\usepackage[page,titletoc]{appendix}
+\renewcommand{\appendixpagename}{Appendix}
+
+% Include PDF documents in LaTeX
+\usepackage{pdfpages}
+
+%------------------------------------------------------------
+%% Font & Paragraph ---------------------------------------%%
+\usepackage{sansmathfonts}                      % For math fonts
+\usepackage[scaled]{helvet}                     % Font family
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\rmdefault}{\sfdefault}
+
+\usepackage{sectsty}    % change the style of any or all of LATEX's sectional headers
+\allsectionsfont{\sfdefault}
+
+\usepackage{fncychap}   % for changing chapter level headings
+% CHAPTER font size
+\ChNameVar{\fontsize{14}{16}\usefont{OT1}{phv}{m}{n}\selectfont}
+\ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\Huge\bfseries\rm} \ChRuleWidth{1pt}
+% Font size of number X
+\ChNumVar{\raggedleft\fontsize{20pt}{25pt}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\raggedright\rm\fontsize{20pt}{25pt}\bfseries\selectfont}
+\ChNameAsIs
+\ChNameVar{[1]}
+
+% Chapter style
+\ChNameUpperCase
+\ChNameVar{\Huge\sf\bf\flushleft}
+\ChNumVar{\Huge\sf\bf}
+\ChTitleVar{\huge\bf\raggedright}
+% Section Style
+\sectionfont{\Large\raggedright}
+\subsectionfont{\large\raggedright}
+\subsubsectionfont{\normalsize\raggedright}
+
+% settings for paragraphs
+\setlength{\parskip}{2mm}
+% defining the space between lines (1.5 is for double-space)
+\usepackage{setspace}
+\onehalfspacing
+%%\renewcommand{\baselinestretch}{1.5}
+
+% AMS mathematical facilities for LaTeX.
+\usepackage{amsmath,amsfonts,amssymb,bm}
+
+\usepackage{eurosym}            % Euro sign
+
+\usepackage[per-mode = symbol,binary-units = true]{siunitx}
+\sisetup{group-minimum-digits = 4}  % Group with a minimum of 4 numbers (i.e. 1 000)
+\DeclareSIUnit{\EUR}{\text{\euro}}
+\DeclareSIUnit[number-unit-product = {}]{\degree}{\SIUnitSymbolDegree}
+
+\usepackage{cancel}     % To have symbols crossed on equations
+\usepackage{gensymb}    % Provides generic commands (\degree, \celsius, \perthousand, \micro and \ohm)
+\usepackage{xfrac}      % allows the user to typeset fractions in the form 'n/d' (\sfrac{1}{2})
+
+% Prevent hyphenation and paragraph breaks
+%\hyphenpenalty=10000
+%\brokenpenalty=5000
+%\clubpenalty=5000
+%\widowpenalty=5000
+
+\flushbottom    % makes all text pages the same height
+
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
+\microtypecontext{spacing=nonfrench}
+
+\SetExtraKerning[unit=space]
+{encoding={*}, family={*}, series={*}, size={footnotesize,small,normalsize}}
+{\textendash={400,400}, % en-dash, add more space around it
+    "28={ ,150}, % left bracket, add space from right
+    "29={150, }, % right bracket, add space from left
+    \textquotedblleft={ ,150}, % left quotation mark, space from right
+    \textquotedblright={150, }} % right quotation mark, space from left
+
+\SetExtraKerning[unit=space]
+{encoding={*}, family={qhv}, series={b}, size={large,Large}}
+{1={-200,-200}, 
+    \textendash={400,400}}
+%%
+%%\SetTracking{encoding={*}, shape=sc}{40}
+
+\usepackage{enumitem}   % Customized lists
+\setlist{noitemsep}     % Make itemize lists more compact
+
+% Numbering of equations, figures and tables
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+
+\usepackage[explicit]{titlesec}
+\titleformat{name=\paragraph,numberless}[runin]{\normalfont\normalsize\bfseries}{}{15pt}{#1.}
+
+%------------------------------------------------------------
+%% Graphics & Figures -------------------------------------%%
+\usepackage{xcolor}         % Package to define colours
+\definecolor{FCUPBlue}{RGB}{147,191,235}    % FCUP color
+
+\usepackage{graphicx}   % Enhanced support for graphics.
+
+% Custom captions under/above floats in tables or figures
+\usepackage{caption}
+\usepackage{subcaption}
+\renewcommand{\figurename}{Fig.} %to support older versions of captions.sty
+\captionsetup{format=plain,indention=0.5cm,labelsep=endash,justification=centerlast,font=footnotesize,labelfont=bf,textfont=it,tableposition=top}
+
+\usepackage[section]{placeins}  % ensure all floats for a section appear before the next \section command
+\usepackage{flafter}            % force floats to appear after they are defined
+
+\usepackage{epstopdf}   % To include eps figures
+
+\usepackage{booktabs}   % For professional looking tables
+\usepackage{multirow}   % Create tabular cells spanning multiple rows
+\usepackage{multicol}   % Create tabular cells spanning multiple columns
+\usepackage{rotating}   % To rotate tables and cell text
+\usepackage{threeparttable} % tables with footnotes
+
+% Path to the figures directory
+\graphicspath{
+    {1_Figs/}
+    {01_FrontMatter/Figs/}
+    {10_Introduction/Figs/}
+    {20_SmallSatellites/Figs/}
+    {30_Oceanography/Figs/}
+    {40_IntegratedScenario/Figs/}
+    {50_ThermalAnalysis/Figs/}
+    {80_Appendices/Figs/}}
+
+%------------------------------------------------------------
+%% Links and Bookmarks ------------------------------------%%
+%%%\usepackage{url}    % To include urls on document
+
+% 'hyperref' package
+\usepackage{hyperref} % enhance documents that are to be output as HTML and PDF
+\hypersetup{
+    colorlinks          = true,         % color text of links and anchors, eliminates borders around links
+    allcolors           = black,        % color for anchor text (black)
+    bookmarksnumbered   = true,         % put section numbers in bookmarks
+    bookmarksopen       = true,         % don't expand bookmarks
+    breaklinks          = true,         % allow links to break over lines 
+    %citecolor           = FCUPblue,     % color of citation links
+    %backref             = true,         % do bibliographical back references
+    %
+    pdfdisplaydoctitle  = true,         % display document title instead of file name in title bar
+    pdfpagelayout       = OneColumn,    % set layout of PDF pages
+    pdfstartview        = FitH,         % starting view of PDF document
+    pdfpagemode         = UseNone,      % set default mode of PDF display (UseOutlines)
+    %
+    pdftitle            = {PhD Thesis Andre Guerra},
+    pdfauthor           = {Andre Guerra},
+    pdfsubject          = {PhD thesis of Andre Guerra.}%,
+    %pdfkeywords         = {\@keywords}    
+}
+
+\usepackage[figure,table]{hypcap}       % Adjusting the anchors of captions.
+
+\usepackage[open,openlevel=2]{bookmark} % For advanced bookmark options
+
+%------------------------------------------------------------
+%% Bibliography -------------------------------------------%%
+\usepackage[square,comma,numbers,sort&compress,longnamesfirst]{natbib}
+
+\usepackage{notoccite}  % Prevent trouble from citations in table of contents, etc
+
+\usepackage{doi}        % hyperlink DOI numbers to dx.doi.org
+
+%------------------------------------------------------------
+%% Headers and Footers ------------------------------------%%
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}   % Defines the page style to fancy
+\fancyhf{}          % Clear headers and footers
+
+%%%% Headers
+% Remove headers and footers on blank pages
+\makeatletter % changes the catcode of @ to 11
+    \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+    \hbox{}
+    %\vspace*{\fill}
+    %\begin{center}
+    %This page intentionally contains only this sentence.
+    %\end{center}
+    %\vspace{\fill}
+    \thispagestyle{empty}
+    \newpage
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother % changes the catcode of @ back to 12
+
+% Define chapter name in smallcaps at header
+\renewcommand{\chaptermark}[1]{\markboth{#1}{a}}     
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+% Remove header and footer lines
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Odd pages with right side header
+\fancyhead[RO]{
+    \begin{tabular}{r|c}
+        {\fontsize{8pt}{8pt}\selectfont FCUP}                   & \multirow{2}{*}{\fontsize{8pt}{10pt}\selectfont\thepage} \\
+        {\fontsize{8pt}{8pt}\selectfont\nouppercase\rightmark}  & \\
+    \end{tabular}%
+}
+
+% Even pages with left side header
+\fancyhead[LE]{
+    \begin{tabular}{c|l}
+    \multirow{2}{*}{\fontsize{8pt}{10pt}\selectfont \thepage}   & {\fontsize{8pt}{8pt}\selectfont FCUP} \\
+                                                                & {\fontsize{8pt}{8pt}\selectfont\nouppercase\leftmark} \\
+    \end{tabular}%
+}
+
+% Odd (Even) pages left (right) side header
+\fancyhead[LO,RE]{
+    \raisebox{-0.4\height}{\includegraphics[height=30pt, keepaspectratio=true]{FCUP_eps}}
+}
+
+\fancypagestyle{plain}{%
+    \fancyhead[RO,LE]{{\fontsize{8pt}{10pt}\selectfont\thepage}}
+    \fancyhead[LO,RE]{}
+}
+
+%%%% Change chapter top margin
+\makeatletter % changes the catcode of @ to 11
+    % For the case \chapter
+    \renewcommand*{\@makechapterhead}[1]{%
+      \vspace*{1\p@}%
+      {\parindent \z@ \raggedright \normalfont
+        \ifnum \c@secnumdepth >\m@ne
+          \if@mainmatter    % Fix for frontmatter, mainmatter, and backmatter 040920
+            \DOCH
+          \fi
+        \fi
+        \interlinepenalty\@M
+        \if@mainmatter  % Fix for frontmatter, mainmatter, and backmatter 060424
+          \DOTI{#1}%
+        \else%
+          \DOTIS{#1}%
+        \fi
+      }}
+    % For the case \chapter*
+    \renewcommand*{\@makeschapterhead}[1]{%
+      \vspace*{1\p@}%
+      {\parindent \z@ \raggedright
+        \normalfont
+        \interlinepenalty\@M
+        \DOTIS{#1}
+        \vskip 10\p@
+      }}
+\makeatother % changes the catcode of @ back to 12
+
+% Footnotes
+\usepackage{footnote}
+% Footnote style
+\renewcommand{\thefootnote}{\roman{footnote}}
+\interfootnotelinepenalty=10000
+
+%------------------------------------------------------------
+%% Customisations -----------------------------------------%%
+
+% Change the way nomenclature is presented
+\makeatletter % changes the catcode of @ to 11
+    \@ifundefined{chapter}
+    {\def\wilh@nomsection{section}}
+    {\def\wilh@nomsection{chapter}}
+
+    \def\thenomenclature{%
+        \begin{multicols*}{2}[%
+        \csname\wilh@nomsection\endcsname*{\nomname}
+        \if@intoc\addcontentsline{toc}{\wilh@nomsection}{\nomname}\fi
+        \nompreamble]
+        \setlength{\columnseprule}{1pt}
+        \list{}{%
+            \labelwidth\nom@tempdim
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \itemsep\nomitemsep
+            \let\makelabel\nomlabel
+        }%
+    }
+    
+    \def\endthenomenclature{%
+        \endlist
+        \end{multicols*}
+    \nompostamble}
+\makeatother % changes the catcode of @ back to 12
+
+%------------------------------------------------------------
+%% Standarisation -----------------------------------------%%
+
+% Hyperref package names for referecing parts of text
+% Macro                 Default
+%\figurename            Figure          % Reference a figure
+%\tablename             Table           % Reference a table
+%\appendixname          Appendix
+%\equationname          Equation
+%\chaptername           chapter
+%\sectionname           section         % Reference a section
+%\subsectionname        subsection
+%\subsubsectionname     subsubsection
+%\paragraphname         paragraph
+%\Hfootnotename         footnote
+
+\addto\extrasUKenglish{%
+    \renewcommand{\chapterautorefname}{Chapter}%
+}
+\addto\extrasUKenglish{%
+    \renewcommand{\sectionautorefname}{Section}%
+}
+\addto\extrasUKenglish{%
+    \def\equationautorefname~#1\null{Equation~(#1)\null}%
+}
+
+
+% end of file Thesis_AndreGuerra.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
