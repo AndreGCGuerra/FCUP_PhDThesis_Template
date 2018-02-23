@@ -39,12 +39,17 @@
 
 
 %------------------------------------------------------------
+%% Front Cover ---------------------------------------------%%
+\pagenumbering{Alph}
+\pagenumbering{gobble}
+%\pagestyle{empty}
+\includepdf{01_FrontMatter/FolhaRostoMAP_v0}
+\cleardoublepage
+
+%------------------------------------------------------------
 %% Front matter -------------------------------------------%%
 \frontmatter
 \pagestyle{plain}
-
-%\includepdf{01_FrontMatter/FolhaRostoMAP_v0}
-%\cleardoublepage
 
 \input{01_FrontMatter/Thesis_Titlepage}
 %\cleardoublepage
@@ -123,6 +128,8 @@
 \input{50_ThermalAnalysis/50_Thermal}
 
 %------------------------------------------------------------
+%\addtocontents{toc}{\protect\newpage}
+% If TOC has a chapter in one page and sections in the other this can be added before
 \input{60_Conclusions/60_Conclusion}
 
 
@@ -134,13 +141,7 @@
 \bibliographystyle{elsarticle-num}
 %%\bibliographystyle{0_Layout/phd_style}
 %\begin{small}
-\bibliography{%
-    70_Bibliography/Introduction_BIB,%
-    70_Bibliography/SmallSat_BIB,%
-    70_Bibliography/Ocean_BIB,%
-    70_Bibliography/NetworkOp_BIB,%
-    70_Bibliography/Thermal_BIB,%
-    70_Bibliography/Appendix_BIB}
+\bibliography{70_Bibliography/Introduction_BIB,70_Bibliography/SmallSat_BIB,70_Bibliography/Ocean_BIB,70_Bibliography/NetworkOp_BIB,70_Bibliography/Thermal_BIB,70_Bibliography/Appendix_BIB}
 %\end{small}
 
 %------------------------------------------------------------
@@ -153,7 +154,17 @@
 \input{80_Appendices/81_Appendices_SAR}
 
 \input{80_Appendices/82_Appendices_ThermalAttitude}
+\cleardoublepage
 
+%------------------------------------------------------------
+%% Back Cover ---------------------------------------------%%
+\pagenumbering{alph}
+\pagenumbering{gobble}
+%\pagestyle{empty}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\includepdf{01_FrontMatter/ContraCapaMAP_v0}
 
 % ----------------------------------------------------------------------
 \end{document}

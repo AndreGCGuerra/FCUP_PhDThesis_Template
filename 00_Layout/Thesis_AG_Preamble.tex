@@ -19,7 +19,7 @@
 ]{todonotes}                                                % TEMP command to review
 \newcommand{\review}[1]{{\textcolor{red}{\framebox{#1}}}}	% TEMP command to review
 
-\pdfminorversion = 6
+\pdfminorversion = 7
 
 %%% Book configurations for report class
 %%\makeatletter % changes the catcode of @ to 11
@@ -97,19 +97,28 @@
 \makenomenclature
 \usepackage{ifthen}
 \renewcommand{\nomgroup}[1]{%
-\ifthenelse{\equal{#1}{R}}{\item[\textbf{Roman Symbols}]}{%
-\ifthenelse{\equal{#1}{G}}{\item[\textbf{Greek Symbols}]}{%
-\ifthenelse{\equal{#1}{A}}{\item[\textbf{Acronyms/Abbreviations}]}{%
-\ifthenelse{\equal{#1}{T}}{\item[\textbf{Superscripts}]}{%
-\ifthenelse{\equal{#1}{S}}{\item[\textbf{Subscripts}]}{%
-\ifthenelse{\equal{#1}{X}}{\item[\textbf{Other Symbols}]}
-{}
-}% matches mathematical symbols > X
-}% matches Subscripts           > T
-}% matches Superscripts         > R
-}% matches Abbreviations        > A
-}% matches Greek Symbols        > G
+    \ifthenelse{\equal{#1}{R}}{\item[\textbf{Roman Symbols}]}{%
+        \ifthenelse{\equal{#1}{G}}{\item[\textbf{Greek Symbols}]}{%
+            \ifthenelse{\equal{#1}{A}}{\item[\textbf{Acronyms/Abbreviations}]}{%
+                \ifthenelse{\equal{#1}{T}}{\item[\textbf{Superscripts}]}{%
+                    \ifthenelse{\equal{#1}{S}}{\item[\textbf{Subscripts}]}{%
+                        \ifthenelse{\equal{#1}{X}}{\item[\textbf{Other Symbols}]}{%
+                            \ifthenelse{\equal{#1}{E}}{\item[\textbf{Electronic Symbols}]}
+                            {}
+                        }% matches Electronic Roman symbols > E
+                    }% matches mathematical symbols > X
+                }% matches Subscripts           > T
+            }% matches Superscripts         > R
+        }% matches Abbreviations        > A
+    }% matches Greek Symbols        > G
 }% matches Roman Symbols        > R
+%% To add some text before printing the list of symbols
+\renewcommand{\nompreamble}{This is a list of several symbols and abreviations used within the body of the document.}
+%
+% This will add the units to the symbols
+%----------------------------------------------
+\newcommand{\nomunit}[1]{\renewcommand{\nomentryend}{\hspace*{\fill}#1}}
+%----------------------------------------------
 
 % Appendix
 \usepackage[page,titletoc]{appendix}
@@ -236,6 +245,13 @@
 \usepackage{rotating}   % To rotate tables and cell text
 \usepackage{threeparttable} % tables with footnotes
 
+% To use pgf-tikz figures
+\usepackage{pgf,tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
 % Path to the figures directory
 \graphicspath{
     {1_Figs/}
@@ -249,7 +265,7 @@
 
 %------------------------------------------------------------
 %% Links and Bookmarks ------------------------------------%%
-%%%\usepackage{url}    % To include urls on document
+\usepackage[hyphens]{url}   % To include urls on document and bibliography
 
 % 'hyperref' package
 \usepackage{hyperref} % enhance documents that are to be output as HTML and PDF
@@ -295,7 +311,7 @@
 %%%% Headers
 % Remove headers and footers on blank pages
 \makeatletter % changes the catcode of @ to 11
-    \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
     \hbox{}
     %\vspace*{\fill}
     %\begin{center}
@@ -315,60 +331,66 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Odd pages with right side header
-\fancyhead[RO]{
-    \begin{tabular}{r|c}
-        {\fontsize{8pt}{8pt}\selectfont FCUP}                   & \multirow{2}{*}{\fontsize{8pt}{10pt}\selectfont\thepage} \\
-        {\fontsize{8pt}{8pt}\selectfont\nouppercase\rightmark}  & \\
-    \end{tabular}%
-}
-
-% Even pages with left side header
-\fancyhead[LE]{
-    \begin{tabular}{c|l}
-    \multirow{2}{*}{\fontsize{8pt}{10pt}\selectfont \thepage}   & {\fontsize{8pt}{8pt}\selectfont FCUP} \\
-                                                                & {\fontsize{8pt}{8pt}\selectfont\nouppercase\leftmark} \\
-    \end{tabular}%
-}
-
-% Odd (Even) pages left (right) side header
-\fancyhead[LO,RE]{
-    \raisebox{-0.4\height}{\includegraphics[height=30pt, keepaspectratio=true]{FCUP_eps}}
-}
-
-\fancypagestyle{plain}{%
-    \fancyhead[RO,LE]{{\fontsize{8pt}{10pt}\selectfont\thepage}}
-    \fancyhead[LO,RE]{}
-}
-
 %%%% Change chapter top margin
 \makeatletter % changes the catcode of @ to 11
-    % For the case \chapter
-    \renewcommand*{\@makechapterhead}[1]{%
-      \vspace*{1\p@}%
-      {\parindent \z@ \raggedright \normalfont
+% For the case \chapter
+\renewcommand*{\@makechapterhead}[1]{%
+    \vspace*{1\p@}%
+    {\parindent \z@ \raggedright \normalfont
         \ifnum \c@secnumdepth >\m@ne
-          \if@mainmatter    % Fix for frontmatter, mainmatter, and backmatter 040920
-            \DOCH
-          \fi
+        \if@mainmatter    % Fix for frontmatter, mainmatter, and backmatter 040920
+        \DOCH
+        \fi
         \fi
         \interlinepenalty\@M
         \if@mainmatter  % Fix for frontmatter, mainmatter, and backmatter 060424
-          \DOTI{#1}%
+        \DOTI{#1}%
         \else%
-          \DOTIS{#1}%
+        \DOTIS{#1}%
         \fi
-      }}
-    % For the case \chapter*
-    \renewcommand*{\@makeschapterhead}[1]{%
-      \vspace*{1\p@}%
-      {\parindent \z@ \raggedright
+}}
+% For the case \chapter*
+\renewcommand*{\@makeschapterhead}[1]{%
+    \vspace*{1\p@}%
+    {\parindent \z@ \raggedright
         \normalfont
         \interlinepenalty\@M
         \DOTIS{#1}
         \vskip 10\p@
-      }}
+}}
 \makeatother % changes the catcode of @ back to 12
+
+\fancypagestyle{myfancy}{
+    % Odd pages with right side header
+    \fancyhead[RO]{
+        \begin{tabular}{r|c} %%% REMOVE (\textbf{DRAFT \today}) for final version!!!
+            {\fontsize{8pt}{8pt}\selectfont FCUP (\textbf{DRAFT \today})}                   & \multirow{2}{*}{\fontsize{8pt}{10pt}\selectfont\thepage} \\
+            {\fontsize{8pt}{8pt}\selectfont\nouppercase\rightmark}  & \\
+        \end{tabular}%
+    }
+    %
+    % Even pages with left side header
+    \fancyhead[LE]{
+        \begin{tabular}{c|l} %%% REMOVE (\textbf{DRAFT \today}) for final version!!!
+            \multirow{2}{*}{\fontsize{8pt}{10pt}\selectfont \thepage}           & {\fontsize{8pt}{8pt}\selectfont FCUP (\textbf{DRAFT \today})} \\
+            & {\fontsize{8pt}{8pt}\selectfont\nouppercase\leftmark} \\
+        \end{tabular}%
+    }
+    %
+    % Odd (Even) pages left (right) side header
+    \fancyhead[LO,RE]{
+        \raisebox{-0.4\height}{\includegraphics[height=30pt, keepaspectratio=true]{FCUP_eps}}
+    }
+}
+
+\fancypagestyle{plain}{%
+    \fancyhead[RO,LE]{{\fontsize{8pt}{10pt}\selectfont\thepage}}
+    \fancyhead[LO,RE,CE,CO]{}
+}
+\fancypagestyle{myfrontmatter}{%
+    \fancyhead[RO,LE]{{\fontsize{8pt}{10pt}\selectfont\thepage}}
+    \fancyhead[LO,RE,CE,CO]{}
+}
 
 % Footnotes
 \usepackage{footnote}
@@ -381,15 +403,16 @@
 
 % Change the way nomenclature is presented
 \makeatletter % changes the catcode of @ to 11
-    \@ifundefined{chapter}
-    {\def\wilh@nomsection{section}}
-    {\def\wilh@nomsection{chapter}}
+\@ifundefined{chapter}
+{\def\wilh@nomsection{section}}
+{\def\wilh@nomsection{chapter}}
 
-    \def\thenomenclature{%
-        \begin{multicols*}{2}[%
+\def\thenomenclature{%
+    \begin{multicols*}{2}[%
         \csname\wilh@nomsection\endcsname*{\nomname}
         \if@intoc\addcontentsline{toc}{\wilh@nomsection}{\nomname}\fi
         \nompreamble]
+        \setlength{\columnsep}{1cm}
         \setlength{\columnseprule}{1pt}
         \list{}{%
             \labelwidth\nom@tempdim
@@ -402,7 +425,7 @@
     
     \def\endthenomenclature{%
         \endlist
-        \end{multicols*}
+    \end{multicols*}
     \nompostamble}
 \makeatother % changes the catcode of @ back to 12
 
@@ -427,6 +450,9 @@
 }
 \addto\extrasUKenglish{%
     \renewcommand{\sectionautorefname}{Section}%
+}
+\addto\extrasUKenglish{%
+\renewcommand{\subsectionautorefname}{Section}%
 }
 \addto\extrasUKenglish{%
     \def\equationautorefname~#1\null{Equation~(#1)\null}%
