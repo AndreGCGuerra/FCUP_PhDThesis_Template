@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-%%%%%%%%%%%%%%%%%%% Thesis_AndreGuerra.tex %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% ThesisTemplate_AndreGuerra.tex %%%%%%%%%%%%%%%%%%%%%%%%
 %
 % PhD Thesis - Main File
 % André Guerra
@@ -37,12 +37,13 @@
 \makeatother % changes the catcode of @ back to 12
 
 
-
 %------------------------------------------------------------
 %% Front Cover ---------------------------------------------%%
 \pagenumbering{Alph}
 \pagenumbering{gobble}
 %\pagestyle{empty}
+\hypertarget{FrontCover}{}
+\bookmark[level=chapter,dest=FrontCover]{Front Cover}
 \includepdf{01_FrontMatter/FolhaRostoMAP_v0}
 \cleardoublepage
 
@@ -81,17 +82,19 @@
 \cleardoublepage
 
 \renewcommand\listfigurename{List of Figures}
-\hypertarget{ListofFigures}{}
-\bookmark[level=chapter,dest=ListofFigures]{List of Figures}
+%\hypertarget{ListofFigures}{}
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures      % List of Figures
-%\addcontentsline{toc}{chapter}{List of Figures}
+%\bookmark[level=chapter,dest=ListofFigures]{List of Figures}
 \cleardoublepage
 
 \renewcommand\listtablename{List of Tables}
-\hypertarget{ListofTables}{}
-\bookmark[level=chapter,dest=ListofTables]{List of Tables}
+%\hypertarget{ListofTables}{}
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables} 
 \listoftables       % List of Tables
-%\addcontentsline{toc}{chapter}{List of Tables}
+%\bookmark[level=chapter,dest=ListofTables]{List of Tables}
 \cleardoublepage
 
 \input{01_FrontMatter/Thesis_Nomenclature}
@@ -99,8 +102,8 @@
 \begin{small}
     \markboth{Nomenclature}{Nomenclature}
     \hypertarget{Nomenclature}{}
-    \bookmark[level=chapter,dest=Nomenclature]{Nomenclature}
-    \printnomenclature
+    \printnomenclature[1.5cm]
+    \addcontentsline{toc}{chapter}{Nomenclature}
     %\end{multicols}
 \end{small}
 \cleardoublepage
@@ -136,10 +139,12 @@
 %------------------------------------------------------------
 %% Bibliography -------------------------------------------%%
 \renewcommand{\bibname}{References}
-\addcontentsline{toc}{chapter}{References}
 %%\bibliographystyle{unsrtnat}
 \bibliographystyle{elsarticle-num}
 %%\bibliographystyle{0_Layout/phd_style}
+%\begin{small}
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
 %\begin{small}
 \bibliography{70_Bibliography/Introduction_BIB,70_Bibliography/SmallSat_BIB,70_Bibliography/Ocean_BIB,70_Bibliography/NetworkOp_BIB,70_Bibliography/Thermal_BIB,70_Bibliography/Appendix_BIB}
 %\end{small}
@@ -168,5 +173,5 @@
 
 % ----------------------------------------------------------------------
 \end{document}
-% end of file Thesis_AndreGuerra.tex
+% end of file ThesisTemplate_AndreGuerra.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
