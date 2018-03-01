@@ -57,6 +57,9 @@
 %    Portuguese text
 %\end{pt}
 
+% For quoting phrases
+\usepackage[autostyle=true,english=british]{csquotes}
+
 %------------------------------------------------------------
 %% Page geometry and others & TOC -------------------------%%
 \usepackage{geometry}	
@@ -112,6 +115,7 @@
         }% matches Abbreviations        > A
     }% matches Greek Symbols        > G
 }% matches Roman Symbols        > R
+%
 %% To add some text before printing the list of symbols
 \renewcommand{\nompreamble}{This is a list of several symbols and abreviations used within the body of the document.}
 %
@@ -133,6 +137,8 @@
 \usepackage[scaled]{helvet}                     % Font family
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\rmdefault}{\sfdefault}
+
+\usepackage{soul}       % For underlining
 
 \usepackage{sectsty}    % change the style of any or all of LATEX's sectional headers
 \allsectionsfont{\sfdefault}
@@ -452,12 +458,12 @@
     \renewcommand{\sectionautorefname}{Section}%
 }
 \addto\extrasUKenglish{%
-\renewcommand{\subsectionautorefname}{Section}%
+    \renewcommand{\subsectionautorefname}{Section}%
 }
 \addto\extrasUKenglish{%
     \def\equationautorefname~#1\null{Equation~(#1)\null}%
 }
 
 
-% end of file Thesis_AndreGuerra.tex
+% end of file Thesis_AG_Preamble.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
