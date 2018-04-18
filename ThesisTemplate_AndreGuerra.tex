@@ -31,15 +31,14 @@
 %% Title Page ---------------------------------------------%%
 
 \makeatletter % changes the catcode of @ to 11
-    \title{Small Satellites and Oceanography XX}    \let\Title\@title
-    \author{\textpt{Andr\'e Gomes da Costa Guerra}} \let\Author\@author
-    \date{\the\year}                                \let\Date\@date
+    \title{Design, thermal analysis and integration of small satellites with a network of autonomous vehicles}                      \let\Title\@title
+    \author{Andr\'e Gomes da Costa Guerra}    \let\Author\@author
+    \date{\the\year}                          \let\Date\@date
 \makeatother % changes the catcode of @ back to 12
 
 
 %------------------------------------------------------------
 %% Front Cover ---------------------------------------------%%
-\pagenumbering{Alph}
 \pagenumbering{gobble}
 %\pagestyle{empty}
 \hypertarget{FrontCover}{}
@@ -122,6 +121,8 @@
 \input{20_SmallSatellites/20_SmallSat}
 
 %------------------------------------------------------------
+%\addtocontents{toc}{\protect\newpage}
+% If TOC has a chapter in one page and sections in the other this can be added before
 \input{30_Oceanography/30_Ocean}
 
 %------------------------------------------------------------
@@ -131,8 +132,6 @@
 \input{50_ThermalAnalysis/50_Thermal}
 
 %------------------------------------------------------------
-%\addtocontents{toc}{\protect\newpage}
-% If TOC has a chapter in one page and sections in the other this can be added before
 \input{60_Conclusions/60_Conclusion}
 
 
@@ -149,6 +148,7 @@
 \bibliography{70_Bibliography/Introduction_BIB,70_Bibliography/SmallSat_BIB,70_Bibliography/Ocean_BIB,70_Bibliography/NetworkOp_BIB,70_Bibliography/Thermal_BIB,70_Bibliography/Appendix_BIB}
 %\end{small}
 
+
 %------------------------------------------------------------
 %% Appendix -----------------------------------------------%%
 \appendix
@@ -163,8 +163,8 @@
 
 %------------------------------------------------------------
 %% Back Cover ---------------------------------------------%%
-\pagenumbering{alph}
 \pagenumbering{gobble}
+\hypersetup{pageanchor=false}
 %\pagestyle{empty}
 \newpage
 \thispagestyle{empty}

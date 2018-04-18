@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-% !TeX root = ../Thesis_AndreGuerra.tex
+% !TeX root = ../ThesisTemplate_AndreGuerra.tex
 %%%%%%%%%%%%%%%%%%%% Thesis_Titlepage.tex %%%%%%%%%%%%%%%%%%%
 %
 % PhD thesis - Title Page
@@ -20,8 +20,11 @@
     % Author and Title
     \begin{center}
         {\LARGE \bf \Author}            \\
-        \vskip 1.5cm%
-        {\Huge \bf \expandafter{\Title}}
+        \vskip 1.5cm
+        %
+        \begin{doublespace}
+            {\Huge \bf \expandafter{\Title}}
+        \end{doublespace}
     \end{center}
 
     \vskip 2cm%
@@ -64,18 +67,18 @@
 }
 
 \newpage{
-\thispagestyle{empty}
-
-\null\vfill
-
-%
-% Copyrights
-\begin{center}
-    \footnotesize
-    \textcopyright\ \Date \\
-    \Author \\
-    ALL RIGHTS RESERVED \\
-\end{center}
+    \thispagestyle{empty}
+    
+    \null\vfill
+    
+    %
+    % Copyrights
+    \begin{center}
+        \footnotesize
+        \textcopyright\ \Date \\
+        \Author \\
+        ALL RIGHTS RESERVED \\
+    \end{center}
 }
 
 % end of file Thesis_Titlepage.tex

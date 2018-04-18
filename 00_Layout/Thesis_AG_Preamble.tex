@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-% !TeX root = ../Thesis_AndreGuerra.tex
+% !TeX root = ../ThesisTemplate_AndreGuerra.tex
 %%%%%%%%%%%%%%%%%%% Thesis_AG_Preamble.tex %%%%%%%%%%%%%%%%%%
 %
 % PhD thesis - Preamble
@@ -13,13 +13,13 @@
 %------------------------------------------------------------
 %% General ------------------------------------------------%%
 
+\pdfminorversion = 7
+
 % Comments and review packages
 \usepackage{lipsum}     % For draft text
 \usepackage[linecolor=red,figcolor=white,colorinlistoftodos,%
 ]{todonotes}                                                % TEMP command to review
 \newcommand{\review}[1]{{\textcolor{red}{\framebox{#1}}}}	% TEMP command to review
-
-\pdfminorversion = 7
 
 %%% Book configurations for report class
 %%\makeatletter % changes the catcode of @ to 11
@@ -99,6 +99,9 @@
 \usepackage[english]{nomencl}
 \makenomenclature
 \usepackage{ifthen}
+% For multicolumn environment check ``Customisations'' bellow
+% Use \vfill\null\columnbreak before ``\item[\textbf{'' to force the title to another column (in a multicolum environment)
+% Use \vfill\null\clearpage in for inside a multicolum environment
 \renewcommand{\nomgroup}[1]{%
     \ifthenelse{\equal{#1}{R}}{\item[\textbf{Roman Symbols}]}{%
         \ifthenelse{\equal{#1}{G}}{\item[\textbf{Greek Symbols}]}{%
@@ -117,7 +120,7 @@
 }% matches Roman Symbols        > R
 %
 %% To add some text before printing the list of symbols
-\renewcommand{\nompreamble}{This is a list of several symbols and abreviations used within the body of the document.}
+\renewcommand{\nompreamble}{This is a list of several symbols and abreviations used within the body of the document. The relevant symbols' values and units are shown on the right margin.}
 %
 % This will add the units to the symbols
 %----------------------------------------------
@@ -255,6 +258,7 @@
 \usepackage{pgf,tikz}
 \usepackage{mathrsfs}
 \usetikzlibrary{arrows}
+\usetikzlibrary[patterns]
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
 
@@ -271,15 +275,14 @@
 
 %------------------------------------------------------------
 %% Links and Bookmarks ------------------------------------%%
-\usepackage[hyphens]{url}   % To include urls on document and bibliography
+\RequirePackage[hyphens]{url}   % To include urls on document and bibliography
 
 % 'hyperref' package
-\usepackage{hyperref} % enhance documents that are to be output as HTML and PDF
+\RequirePackage{hyperref} % enhance documents that are to be output as HTML and PDF
 \hypersetup{
     colorlinks          = true,         % color text of links and anchors, eliminates borders around links
     allcolors           = black,        % color for anchor text (black)
     bookmarksnumbered   = true,         % put section numbers in bookmarks
-    bookmarksopen       = true,         % don't expand bookmarks
     breaklinks          = true,         % allow links to break over lines 
     %citecolor           = FCUPblue,     % color of citation links
     %backref             = true,         % do bibliographical back references
@@ -297,7 +300,7 @@
 
 \usepackage[figure,table]{hypcap}       % Adjusting the anchors of captions.
 
-\usepackage[open,openlevel=2]{bookmark} % For advanced bookmark options
+\usepackage[open,openlevel=0]{bookmark} % For advanced bookmark options
 
 %------------------------------------------------------------
 %% Bibliography -------------------------------------------%%
@@ -409,30 +412,30 @@
 
 % Change the way nomenclature is presented
 \makeatletter % changes the catcode of @ to 11
-\@ifundefined{chapter}
-{\def\wilh@nomsection{section}}
-{\def\wilh@nomsection{chapter}}
-
-\def\thenomenclature{%
-    \begin{multicols*}{2}[%
-        \csname\wilh@nomsection\endcsname*{\nomname}
-        \if@intoc\addcontentsline{toc}{\wilh@nomsection}{\nomname}\fi
-        \nompreamble]
-        \setlength{\columnsep}{1cm}
-        \setlength{\columnseprule}{1pt}
-        \list{}{%
-            \labelwidth\nom@tempdim
-            \leftmargin\labelwidth
-            \advance\leftmargin\labelsep
-            \itemsep\nomitemsep
-            \let\makelabel\nomlabel
-        }%
-    }
+    \@ifundefined{chapter}
+    {\def\wilh@nomsection{section}}
+    {\def\wilh@nomsection{chapter}}
     
-    \def\endthenomenclature{%
-        \endlist
-    \end{multicols*}
-    \nompostamble}
+    \def\thenomenclature{%
+        \begin{multicols*}{2}[%
+            \csname\wilh@nomsection\endcsname*{\nomname}
+            \if@intoc\addcontentsline{toc}{\wilh@nomsection}{\nomname}\fi
+            \nompreamble]
+            \setlength{\columnsep}{1cm}
+            \setlength{\columnseprule}{1pt}
+            \list{}{%
+                \labelwidth\nom@tempdim
+                \leftmargin\labelwidth
+                \advance\leftmargin\labelsep
+                \itemsep\nomitemsep
+                \let\makelabel\nomlabel
+            }%
+        }
+        
+        \def\endthenomenclature{%
+            \endlist
+        \end{multicols*}
+   \nompostamble}
 \makeatother % changes the catcode of @ back to 12
 
 %------------------------------------------------------------
